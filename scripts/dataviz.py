@@ -15,10 +15,15 @@ import sqlite3
 
 
 #Lendo o banco de dados
-conn = sqlite3.connect('banco.db')
-query = "SELECT * FROM dados"
-df = pd.read_sql_query(query, conn)
-
+try:
+    conn = sqlite3.connect('banco.db')
+    query = "SELECT * FROM dados"
+    df = pd.read_sql_query(query, conn)
+except:
+    db_path = '/mount/src/etapafinal_projeto/scripts/banco.db'
+    conn = sqlite3.connect(db_path)
+    query = "SELECT * FROM dados"
+    df = pd.read_sql_query(query, conn)
 
 #Filtros para a responsividade
 st.sidebar.header('**Fitros**')
